@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeApp.Domain", "RecipeApp.Domain\RecipeApp.Domain.csproj", "{07A91F00-A72B-4549-BD4B-79A0DE17018C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeApp.Application", "RecipeApp.Application\RecipeApp.Application.csproj", "{BF22AB38-04AC-44F4-B535-D00E646E21C1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{07A91F00-A72B-4549-BD4B-79A0DE17018C} = {07A91F00-A72B-4549-BD4B-79A0DE17018C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeApp.Infrastructure", "RecipeApp.Infrastructure\RecipeApp.Infrastructure.csproj", "{9AC22A90-10D8-444F-BA93-8E13D3E5A028}"
+	ProjectSection(ProjectDependencies) = postProject
+		{07A91F00-A72B-4549-BD4B-79A0DE17018C} = {07A91F00-A72B-4549-BD4B-79A0DE17018C}
+		{BF22AB38-04AC-44F4-B535-D00E646E21C1} = {BF22AB38-04AC-44F4-B535-D00E646E21C1}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeApp.API", "RecipeApp.API\RecipeApp.API.csproj", "{AB2DF967-92CA-4EB9-A486-14F90E6F4FF4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{07A91F00-A72B-4549-BD4B-79A0DE17018C} = {07A91F00-A72B-4549-BD4B-79A0DE17018C}
+		{9AC22A90-10D8-444F-BA93-8E13D3E5A028} = {9AC22A90-10D8-444F-BA93-8E13D3E5A028}
+		{BF22AB38-04AC-44F4-B535-D00E646E21C1} = {BF22AB38-04AC-44F4-B535-D00E646E21C1}
+	EndProjectSection
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeApp.Application.Tests.Unit", "Tests\RecipeApp.Application.Tests\RecipeApp.Application.Tests.Unit.csproj", "{11A1EFCE-F899-4BA7-A5E4-281CDBAA07AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeApp.Infrastructure.Tests.Unit", "Tests\RecipeApp.Integration.Tests\RecipeApp.Infrastructure.Tests.Unit.csproj", "{6903CAE1-8FDF-427C-9CE0-417D2E9FE71A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeApp.API.Tests.Integration", "Tests\RecipeApp.API.Integration\RecipeApp.API.Tests.Integration.csproj", "{4D66C04D-70CE-4C62-A161-A336160AD745}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07A91F00-A72B-4549-BD4B-79A0DE17018C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A91F00-A72B-4549-BD4B-79A0DE17018C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A91F00-A72B-4549-BD4B-79A0DE17018C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A91F00-A72B-4549-BD4B-79A0DE17018C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF22AB38-04AC-44F4-B535-D00E646E21C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF22AB38-04AC-44F4-B535-D00E646E21C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF22AB38-04AC-44F4-B535-D00E646E21C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF22AB38-04AC-44F4-B535-D00E646E21C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AC22A90-10D8-444F-BA93-8E13D3E5A028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AC22A90-10D8-444F-BA93-8E13D3E5A028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AC22A90-10D8-444F-BA93-8E13D3E5A028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AC22A90-10D8-444F-BA93-8E13D3E5A028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB2DF967-92CA-4EB9-A486-14F90E6F4FF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB2DF967-92CA-4EB9-A486-14F90E6F4FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB2DF967-92CA-4EB9-A486-14F90E6F4FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB2DF967-92CA-4EB9-A486-14F90E6F4FF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A1EFCE-F899-4BA7-A5E4-281CDBAA07AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A1EFCE-F899-4BA7-A5E4-281CDBAA07AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A1EFCE-F899-4BA7-A5E4-281CDBAA07AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A1EFCE-F899-4BA7-A5E4-281CDBAA07AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6903CAE1-8FDF-427C-9CE0-417D2E9FE71A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6903CAE1-8FDF-427C-9CE0-417D2E9FE71A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6903CAE1-8FDF-427C-9CE0-417D2E9FE71A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6903CAE1-8FDF-427C-9CE0-417D2E9FE71A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D66C04D-70CE-4C62-A161-A336160AD745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D66C04D-70CE-4C62-A161-A336160AD745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D66C04D-70CE-4C62-A161-A336160AD745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D66C04D-70CE-4C62-A161-A336160AD745}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{11A1EFCE-F899-4BA7-A5E4-281CDBAA07AB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{6903CAE1-8FDF-427C-9CE0-417D2E9FE71A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{4D66C04D-70CE-4C62-A161-A336160AD745} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C57CE4B-5CA9-41E6-92E6-811C12F038B4}
+	EndGlobalSection
+EndGlobal

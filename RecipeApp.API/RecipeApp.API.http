@@ -1,0 +1,124 @@
+@RecipeApp.API_HostAddress = http://localhost:8081
+
+### Register a new user, should already exist
+POST {{RecipeApp.API_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "Password123!",
+  "confirmPassword": "Password123!"
+}
+
+### Register another user for testing
+POST {{RecipeApp.API_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "chef1@example.com", 
+  "password": "ChefPassword123!",
+  "confirmPassword": "ChefPassword123!"
+}
+
+### Login with registered user
+POST {{RecipeApp.API_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "Password123!"
+}
+
+### Login with chef user
+POST {{RecipeApp.API_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "chef@example.com",
+  "password": "ChefPassword123!"
+}
+
+### Test duplicate registration (should fail)
+POST {{RecipeApp.API_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "AnotherPassword123!",
+  "confirmPassword": "AnotherPassword123!"
+}
+
+### Test invalid login (should fail)
+POST {{RecipeApp.API_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "WrongPassword123!"
+}
+
+### Test registration with weak password (should fail)
+POST {{RecipeApp.API_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "weakpass@example.com",
+  "password": "weak",
+  "confirmPassword": "weak"
+}
+
+### Test registration with mismatched passwords (should fail)
+POST {{RecipeApp.API_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "mismatch@example.com",
+  "password": "Password123!",
+  "confirmPassword": "DifferentPassword123!"
+}
+
+### Create a recipe (requires authentication - use token from login response)
+# @name loginResponse
+POST {{RecipeApp.API_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "Password123!"
+}
+
+### Create a recipe with auth token
+POST {{RecipeApp.API_HostAddress}}/api/recipes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTg3ZWUzLTk2MTMtNzk5NS1iY2MxLWY5NjZkNGI4NTU3YiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ0ZXN0dXNlckBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzU0NTk0NzQ0LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODEifQ.qA5TxiZLTxuXTVrJiaLcNEQrWe_AFj3e7dlJjdOMye8
+
+{
+  "name": "Delicious Pasta Carbonara",
+  "instructions": "1. Cook spaghetti according to package directions. 2. In a bowl, whisk together eggs, cheese, and black pepper. 3. Drain pasta and immediately toss with egg mixture. 4. Add crispy pancetta and serve immediately.",
+  "difficulty": 3
+}
+
+### Create another recipe
+POST {{RecipeApp.API_HostAddress}}/api/recipes
+Content-Type: application/json
+Authorization: Bearer {{loginResponse.response.body.token}}
+
+{
+  "name": "Simple Avocado Toast",
+  "instructions": "1. Toast bread slices until golden. 2. Mash ripe avocado with lime juice and salt. 3. Spread avocado on toast. 4. Top with everything bagel seasoning.",
+  "difficulty": 1
+}
+
+### Get all recipes (no auth required)
+GET {{RecipeApp.API_HostAddress}}/api/recipes
+Accept: application/json
+
+### Test creating recipe without auth (should fail)
+POST {{RecipeApp.API_HostAddress}}/api/recipes
+Content-Type: application/json
+
+{
+  "name": "Unauthorized Recipe",
+  "instructions": "This should fail without authentication",
+  "difficulty": 2
+}

@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16 
+    container_name: recipeapp_db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=localdevpassword
+      - POSTGRES_DB=recipeappdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  recipeapp.api:
+    build:
+      context: .
+      dockerfile: RecipeApp.API/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DbConnection=Host=db;Port=5432;Database=recipeappdb;Username=admin;Password=localdevpassword
+    depends_on:
+      - db
+    restart: on-failure
+    develop:
+      watch:
+        - action: rebuild
+          path: ./RecipeApp.API
+          target: /src/RecipeApp.API
+        - action: rebuild
+          path: ./RecipeApp.Application
+          target: /src/RecipeApp.Application
+        - action: rebuild
+          path: ./RecipeApp.Domain
+          target: /src/RecipeApp.Domain
+        - action: rebuild
+          path: ./RecipeApp.Infrastructure
+          target: /src/RecipeApp.Infrastructure
+
+volumes:
+  postgres_data:
